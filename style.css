@@ -1,0 +1,299 @@
+/* ==========================================================================
+   1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И СБРОС СТИЛЕЙ
+   ========================================================================== */
+:root {
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #3b82f6;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --border-color: #e9ecef;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Название секции ассортимента */
+h1, .section-title {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   2. ПАНЕЛЬ ФИЛЬТРОВ (МЕНЮ)
+   ========================================================================== */
+.filters-panel {
+    background: var(--card-bg);
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.filters-panel input[type="text"],
+.filters-panel select {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    color: #495057;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.filters-panel select::-ms-expand {
+    display: none;
+}
+
+.filter-group-select {
+    position: relative;
+}
+
+.filter-group-select::after {
+    content: "▼";
+    font-size: 10px;
+    color: #adb5bd;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.filters-panel input[type="text"]:focus,
+.filters-panel select:focus {
+    background-color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.range-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 200px;
+}
+
+.range-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #343a40;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters-panel input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 5px;
+    outline: none;
+    margin: 10px 0;
+}
+
+.filters-panel input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    transition: transform 0.1s;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+}
+
+.filters-panel input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* ==========================================================================
+   3. СЕТКА ТОВАРОВ И КАРТОЧКИ
+   ========================================================================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.product-img-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image {
+    font-size: 36px;
+    color: #ced4da;
+    opacity: 0.6;
+    user-select: none;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.product-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6em;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f3f5;
+    padding-top: 8px;
+    margin-top: auto;
+}
+
+.puffs-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: #f1f3f5;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.loader {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   4. АДАПТИВНОСТЬ
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .filters-panel {
+        padding: 12px;
+        gap: 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .filter-group,
+    .range-group {
+        flex: 1 1 100%;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .product-card {
+        padding: 10px; /* Уменьшили внутренний отступ карточки, чтобы дать элементам больше места */
+        gap: 8px;
+    }
+
+    .product-title {
+        font-size: 0.85rem;
+    }
+
+    /* Радикально уменьшенные стили нижней плашки для мобильных */
+    .puffs-count {
+        font-size: 0.62rem;  /* Шрифт плашки стал ещё меньше */
+        padding: 1px 4px;    /* Минимальные отступы вокруг текста затяжек */
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 0.88rem;  /* Шрифт стоимости стал ещё меньше */
+    }
+}

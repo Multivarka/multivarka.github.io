@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог продукции</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Наш ассортимент</h1>
+
+            <div class="filters-panel">
+                <div class="filter-group">
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Поиск товара...">
+                </div>
+
+                <div class="filter-group filter-group-select">
+                    <select id="brandFilter" onchange="filterProducts()">
+                        <option value="">Все бренды</option>
+                    </select>
+                </div>
+
+                <div class="filter-group filter-group-select">
+                    <select id="sortFilter" onchange="filterProducts()">
+                        <option value="default">По умолчанию</option>
+                        <option value="priceAsc">По цене ⭡</option>
+                        <option value="priceDesc">По цене ⭣</option>
+                        <option value="puffsAsc">По затяжкам ⭡</option>
+                        <option value="puffsDesc">По затяжкам ⭣</option>
+                    </select>
+                </div>
+
+                <div class="range-group">
+                    <div class="range-label">
+                        <span>Затяжки:</span>
+                        <span id="puffValue">Все</span>
+                    </div>
+                    <input type="range" id="puffRange" min="0" max="30000" step="500" value="0" oninput="filterProducts()">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="product-grid" id="productGrid">
+            <div class="loader">Загрузка товаров...</div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
